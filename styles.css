@@ -1,0 +1,392 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.app {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-family: 'Rubik', Arial, Helvetica, sans-serif;
+}
+
+.app__container {
+  width: 700px;
+  height: 528px;
+  border-radius: 12px;
+  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  position: relative;
+}
+
+.start__header {
+  background-color: darkmagenta;
+  padding: 20px;
+  color: white;
+  text-align: center;
+}
+
+.start__title {
+  font-size: 40px;
+  margin-bottom: 12px;
+}
+
+.start__subtitle {
+  font-size: 20px;
+}
+
+.start__main {
+  padding: 40px;
+}
+
+.start__title-secondary {
+  font-size: 24px;
+  margin-bottom: 24px;
+  color: darkslateblue;
+  text-align: center;
+}
+
+.start__list {
+  list-style: none;
+  padding-left: 60px;
+  margin-bottom: 30px;
+}
+
+.start__item {
+  margin-bottom: 15px;
+  position: relative;
+}
+
+.start__item::before {
+  position: absolute;
+  content: '';
+  background-repeat: no-repeat;
+  background-size: contain;
+  left: -40px;
+  top: 0;
+}
+
+.start__item:nth-child(1):before {
+  width: 25px;
+  height: 13px;
+  background-image: url(./images/1.svg);
+}
+.start__item:nth-child(2):before {
+  width: 22px;
+  height: 22px;
+  background-image: url(./images/2.svg);
+}
+.start__item:nth-child(3):before {
+  width: 28px;
+  height: 21px;
+  background-image: url(./images/3.svg);
+}
+
+.start__item:last-child {
+  margin-bottom: 0;
+}
+
+.start__item-title {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+
+.button {
+  display: block;
+  padding: 20px 30px;
+  border-radius: 30px;
+  border: none;
+  background-color: darkslateblue;
+  color: white;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  width: 150px;
+  margin: auto;
+  cursor: pointer;
+  transition: background 300ms ease;
+  font-family: 'Rubik', Arial, Helvetica, sans-serif;
+}
+
+.button:hover {
+  background-color: darkviolet;
+}
+
+@keyframes start {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.game,
+.timer {
+  width: 600px;
+  height: 500px;
+  background-color: deepskyblue;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
+  padding: 15px;
+  animation: start 500ms ease-in;
+}
+
+.game__start {
+  content: '';
+  position: absolute;
+  background-color: transparent;
+  width: 100%;
+  height: 100%;
+  inset: 0;
+  cursor: pointer;
+}
+
+.game__task {
+  margin-top: 15px;
+  display: flex;
+  align-items: center;
+  width: 465px;
+  gap: 20px;
+  padding: 20px 50px;
+  color: white;
+  border-radius: 8px;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
+  margin-bottom: 30px;
+}
+
+.game__description {
+  font-size: 20px;
+}
+
+.game__number {
+  font-size: 40px;
+}
+
+@keyframes visibleCards {
+  0% {
+    transform: translateX(300px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.game__cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  justify-items: center;
+  justify-items: stretch;
+  gap: 15px;
+  max-width: 480px;
+  margin-inline: auto;
+  margin-bottom: 20px;
+}
+
+.game__card {
+  padding-block: 20px;
+  font-size: 40px;
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+  text-align: center;
+}
+
+.game__card:hover {
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+}
+
+.game__notification {
+  color: white;
+  text-align: center;
+}
+
+.game__hand {
+  position: absolute;
+  width: 96px;
+  height: 103px;
+  background-image: url(./images/hand.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  left: 91px;
+  bottom: 194px;
+}
+
+.game__right {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-image: url(./images/yes.svg);
+  background-repeat: no-repeat;
+  background-size: contain;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 1000ms linear, opacity 450ms ease-in-out;
+}
+
+.game__right_visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.game__wrong {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-image: url(./images/no.svg);
+  background-repeat: no-repeat;
+  background-size: contain;
+  opacity: 0;
+  visibility: hidden;
+  transition: visibility 1000ms linear, opacity 450ms ease-in-out;
+}
+
+.game__wrong_visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.game__card-number_font_medium {
+  font-size: 30px;
+}
+
+.game__card-number_font_small {
+  font-size: 20px;
+}
+
+.game__card-number_font_small-2 {
+  font-size: 15px;
+}
+
+.game__card-number_font_small-3 {
+  font-size: 12px;
+}
+
+.timer {
+  background-color: darkorchid;
+  justify-content: center;
+}
+
+@keyframes timer {
+  0% {
+    transform: scale(0.8);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.game__info {
+  display: flex;
+  justify-content: space-between;
+  color: white;
+  gap: 300px;
+}
+
+.timer__container {
+  align-self: center;
+  color: white;
+  font-size: 64px;
+  border: 4px solid white;
+  width: 90px;
+  height: 90px;
+  display: grid;
+  place-items: center;
+  border-radius: 100%;
+}
+
+/* Animation Cards */
+
+@keyframes zoom {
+  0% {
+    transform: scale(0.6);
+  }
+
+  100% {
+    transform: scale(1.1);
+  }
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-20deg);
+  }
+  50% {
+    transform: rotate(0deg);
+  }
+
+  75% {
+    transform: rotate(20deg);
+  }
+
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes blink {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes result {
+  0% {
+    opacity: 0;
+    background-color: rgb(85, 218, 85);
+  }
+  100% {
+    opacity: 1;
+    background-color: darkseagreen;
+  }
+}
+
+.result {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: auto;
+  background-color: darkseagreen;
+  height: 100%;
+  animation: result 1000ms linear;
+}
+
+.result__text,
+.result__end {
+  color: white;
+}
+
+.result__text {
+  margin-top: 60px;
+  margin-bottom: 40px;
+  font-size: 24px;
+}
+
+.result__end {
+  margin-top: 100px;
+  margin-bottom: 40px;
+  font-size: 36px;
+}
