@@ -29,6 +29,7 @@ class Game {
           <div class="game__right"></div>
           </div>`;
     this.result = 0;
+    this.time = 60;
   }
 
   setResult() {
@@ -97,8 +98,10 @@ class Game {
           this.stylesBackgroundColor
         )}; animation: visibleCards 1000ms ease;`;
       }
-      cards.prepend(div);
-      div.prepend(textNumber);
+      if (cards) {
+        cards.prepend(div);
+        div.prepend(textNumber);
+      }
     });
   }
 
@@ -106,9 +109,10 @@ class Game {
     const start = setInterval(() => {
       document.querySelector('.game__time span').textContent = this.time;
       this.time--;
-      if (this.time < 0) {
-        clearInterval(start);
+      if (this.time <= 0 || this.result === 10) {
+        this.time = 60;
         this._delete();
+        clearInterval(start);
       }
     }, 1000);
   }
@@ -129,7 +133,6 @@ class Game {
       card.addEventListener('click', () => {
         if (card.textContent === currentNumber.textContent) {
           this.setResult();
-          console.log(this.result);
           iconResultRight.classList.add('game__right_visible');
           setTimeout(() => {
             iconResultRight.classList.remove('game__right_visible');
@@ -241,7 +244,6 @@ class Game {
     this.app.innerHTML = this.temlate;
     this.level1();
     this.startTimer();
-    this.time = 60;
     this.result = 0;
     window.localStorage.setItem('result', this.result);
   }

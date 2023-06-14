@@ -12,7 +12,6 @@ class Timer {
     let count = 4;
     const timer = setInterval(() => {
       count--;
-      console.log(count);
       document.querySelector('.timer__number').textContent = count;
       document.querySelector('.timer__number').style =
         'animation: timer 700ms  ease  infinite ';

@@ -11,7 +11,3 @@ const game = new Game('.app__container', () => result.render());
 const result = new Result('.app__container', () => game.render());
 
 start.render();
-
-// start.render();
-
-// console.log(document.querySelector('.app__container'));
